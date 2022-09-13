@@ -1,0 +1,562 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&display=swap');
+
+:root {
+  --main-bg-color: #44A1A0;
+  --drk-box-shadow: 0 3px 10px #388281;
+  --main-txt-color: #E8E9ED;
+  --yellow: #f0c419;
+  --yellow-opaque: #f0c41960;
+  --pink: #FF7B9C;
+}
+
+/* GLOBAL */
+body {
+  font-family: 'Nunito', sans-serif;
+  margin: 0;
+  background-color: var(--main-bg-color);
+  color: var(--main-txt-color);
+  text-align: center;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.flex-col-strd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-row-strd {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.invert-color {
+  color: var(--main-bg-color);
+  background-color: var(--main-txt-color);
+}
+
+form input {
+  border: none;
+  background-color: var(--yellow-opaque);
+  border-radius: 5px;
+  height: 22.8px;
+}
+
+form button {
+  border: none;
+  background-color: var(--main-txt-color);
+  color: var(--yellow);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+/* NAVBAR */
+header {
+  box-shadow: var(--drk-box-shadow);
+  z-index: 1;
+}
+
+.nav-container {
+  display: grid;
+  grid-template-columns: 75% 25%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 20px;
+}
+
+.time-date {
+  display: grid;
+  grid-template-columns: 33.333% 66.666%;
+}
+
+.greeting {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header a {
+  text-decoration: none;
+  color: var(--main-bg-color);
+}
+
+h2 {
+  margin: 0;
+}
+
+.nav-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.nav-left p {
+  margin: 0
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.links h2 {
+  padding: 0 5px;
+}
+
+/* HOMEPAGE */
+.homepage {
+  height: calc(100vh - 106.08px);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "wellness weather timer"
+    "today weather todo"
+    "today quote todo";
+}
+
+#weather-section {
+  grid-area: weather;
+}
+
+/* weather */
+.current-weather {
+  padding-top: 30px;
+}
+
+.current-weather img {
+  height: 100px;
+  padding: 5px;
+}
+
+.weather-forecast {
+  padding: 10px 0;
+}
+
+.weather-forecast div {
+  align-items: flex-end
+}
+
+.weather-forecast img {
+  height: 60px;
+  padding: 5px;
+}
+
+/* TIMER & WELLNESS*/
+
+#wellness-section {
+  grid-area: wellness;
+}
+
+#timer-section {
+  grid-area: timer;
+}
+
+.upper-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.split-box {
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  margin-top: 20px;
+  box-shadow: var(--drk-box-shadow);
+  width: 60%;
+}
+
+.left-split-box {
+  justify-content: flex-start;
+  height: 100%;
+  width: 50%;
+  padding: 0 3% 3%;
+  background-color: var(--pink);
+  border-radius: 5px 0 0 5px;
+}
+
+.right-split-box {
+  justify-content: flex-start;
+  height: 100%;
+  width: 50%;
+  padding: 0 3% 3%;
+  background-color: var(--yellow);
+  border-radius: 0 5px 5px 0;
+}
+
+/* timer */
+.timer {
+  height: 100px;
+}
+
+.time-display {
+  margin: 0 10%;
+  font-size: 1rem;
+  border: 1px solid #E8E9ED;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.exercise-div {
+  padding-top: 5%;
+}
+
+.exercise-div img {
+  float: left;
+}
+
+.exercise-div p {
+  margin: 3px;
+}
+
+.yellow {
+  font-size: 1.1rem;
+  color: #ffe062;
+  font-weight: 800;
+}
+
+.pink {
+  color: var(--main-txt-color);
+  background-color: var(--pink);
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: var(--drk-box-shadow);
+}
+
+/* wellness */
+.wellness {
+  height: auto;
+}
+
+.wellness input {
+  width: 70%;
+  margin: 2px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FFFFFF80;
+}
+
+.wellness button {
+  background-color: transparent;
+  border: none;
+  color: var(--main-txt-color);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.wellness ul {
+  margin: 0;
+  cursor: pointer;
+}
+
+.message {
+  width: 60%
+}
+
+.gratitude-image {
+  height: 80px;
+  padding: 5px;
+  margin: 0;
+}
+
+/* TODO */
+#todo-list-section {
+  grid-area: todo;
+}
+
+#today-list-section {
+  grid-area: today;
+}
+
+#todo-list-section,
+#today-list-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
+
+.todo {
+  min-height: 270px;
+  width: 70%;
+  margin: 5%;
+  border-radius: 5px;
+  box-shadow: var(--drk-box-shadow);
+}
+
+.todo ul {
+  cursor: pointer;
+  height: 150px;
+  overflow: auto;
+}
+
+.todo li {
+  padding: 2px 10px;
+}
+
+/* QUOTE*/
+#quote-section {
+  grid-area: quote;
+  margin-bottom: 5%;
+}
+
+/* media queries for header and body */
+@media (max-width:1300px) {
+  .split-box {
+    width: 80%;
+  }
+}
+
+@media (max-width:1000px) {
+  .split-box {
+    width: 90%;
+  }
+
+  .todo {
+    width: 80%;
+  }
+}
+
+@media (max-width:750px) {
+
+  /* nav */
+  .nav-left p {
+    text-align: left;
+    max-width: 100px;
+  }
+
+  /* home */
+  .homepage {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "weather"
+      "timer"
+      "today"
+      "wellness"
+      "todo"
+      "quote";
+  }
+
+  .section {
+    margin-bottom: 30px;
+  }
+
+  .upper-section {
+    padding-bottom: 5%;
+  }
+
+  .split-box {
+    width: 50%;
+  }
+
+  .todo {
+    width: 40%;
+  }
+
+  .todo ul {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+@media (max-width:600px) {
+
+  /* nav */
+  .nav-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .time-date {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .nav-left {
+    align-items: center;
+  }
+
+  .nav-left p {
+    max-width: 100%;
+  }
+
+  .time-date h1 {
+    grid-area: greeting;
+    font-size: 2rem;
+  }
+
+  .time-date h2 {
+    margin: 0;
+  }
+
+  .links {
+    align-items: center;
+  }
+
+  .links h2 {
+    color: var(--pink);
+    font-size: 1.2rem;
+    padding: 20px 10px 10px;
+  }
+
+  /* home */
+  .split-box {
+    width: 70%;
+  }
+
+  .todo {
+    width: 60%;
+  }
+  #quote-section {
+  padding: 0 10px 40px;
+  }
+}
+
+/* CALENDAR */
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  margin: 50px 10px;
+}
+
+.calendar {
+  width: clamp(300px, 50vw + 100px, 700px);
+  border: solid 2px #E8E9ED;
+  border-radius: 10px;
+  box-shadow: var(--drk-box-shadow);
+}
+
+/* calendar header */
+.calendar-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.calendar h3 {
+  font-size: clamp(1.3rem, 2vw + 1rem, 3rem);
+}
+
+.calendar-header button {
+  font-size: clamp(1.3rem, 2vw + 1rem, 3rem);
+  color: #E8E9ED;
+  background-color: #FF7B9C;
+  padding: 5px 10px;
+  border: solid 2px #E8E9ED;
+  border-radius: 10px;
+  box-shadow: var(--drk-box-shadow);
+}
+
+/* calendar-body */
+.weekdays,
+.calendar-cells {
+  width: 100%;
+  display: grid;
+  background-color: #E8E9ED;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 1px;
+}
+
+.weekdays,
+.calendar-cells div {
+  border-top: solid 1px #E8E9ED;
+  height: clamp(20px, 2vw + 20px, 50px);
+}
+
+.w-cell,
+.highlight,
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #44A1A0;
+}
+
+.w-cell {
+  font-size: clamp(.8rem, .5vw + .8rem, 1.5rem);
+  font-weight: 900;
+  color: var(--yellow);
+}
+
+.highlight {
+  background-color: var(--pink);
+}
+
+.opaque {
+  opacity: 50%;
+}
+
+.calendar p {
+  margin: 0;
+}
+
+/* calendar footer */
+.calendar-footer {
+  border-top: 1px solid #E8E9ED;
+  color: var(--yellow);
+}
+
+/* pop-out */
+.pop-out-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 10px;
+}
+
+.pop-out {
+  display: flex;
+  flex-direction: column;
+  width: clamp(300px, 50vw + 100px, 700px);
+  color: var(--main-bg-color);
+  background-color: var(--main-txt-color);
+  border-radius: 10px;
+  box-shadow: var(--drk-box-shadow);
+}
+
+.pop-out h3 {
+  font-size: clamp(1.5rem, 1vw + 1rem, 1.5rem);
+  border-top: solid 2px #f0c419;
+  border-bottom: solid 2px #f0c419;
+  padding: 5px 0;
+}
+
+.popout-body {
+  text-align: left;
+  margin: -28.28px 10% 5%;
+}
+
+.popout-body span {
+  color: var(--yellow);
+}
+
+.popout-body div {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.popout-body ul,
+.popout-body details {
+  padding-left: 5%;
+}
