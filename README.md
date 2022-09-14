@@ -1,1 +1,12 @@
-https://mern-wellness-homepage.herokuapp.com/
+Wellness Homepage helps you work in a more healthy and mindful way.
+
+- Deployed on Heroku: https://wellness-homepage.herokuapp.com/
+- A MERN stack application with responsive design.
+- Features include: a work timer, a break timer that encourages you to get up and move, daily wellness goals, a gratitude list, a weather forcast and todo lists. 
+- Calendar page allows you to view data from past days
+
+Future features:
+- Improve work timer (allow for when heroku app goes to sleep and for over night)
+- Authentification
+- Page greeting customised to user 
+- User data stored in DB and displayed on their calendar page 
