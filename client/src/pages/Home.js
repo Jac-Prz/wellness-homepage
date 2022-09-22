@@ -22,6 +22,7 @@ const Home = () => {
             body: JSON.stringify({
                 date: today,
                 secondsWorked: 0,
+                workTimerStart: null, 
                 dailyWellness: {
                     meditate: false,
                     move: false,
@@ -33,8 +34,7 @@ const Home = () => {
                     item2: "",
                     item3: ""
                 },
-                continueTimer: false
-            })
+                })
         });
         const json = await response.json()
 

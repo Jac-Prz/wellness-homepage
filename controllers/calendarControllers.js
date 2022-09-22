@@ -44,9 +44,9 @@ const deleteItem = async (req, res) => {
 // update one
 
 const updateItem = async (req, res) => {
-    const { id } = req.params;
+    const { date } = req.params;
 
-    const item = await CalendarDay.findOneAndUpdate({ date: id }, { ...req.body });
+    const item = await CalendarDay.findOneAndUpdate({ date: date }, { ...req.body });
     console.log(req.body);
  
     if (!CalendarDay) {

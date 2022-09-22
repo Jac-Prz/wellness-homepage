@@ -27,6 +27,12 @@ export const calendarReducer = (state, action) => {
                     ...state.day, secondsWorked: action.payload
                 }
             }
+            case "SET_WORK_START_TIME":
+            return {
+                day: {
+                    ...state.day, workTimerStart: action.payload
+                }
+            }
         case "SET_EXERCISES":
             return {
                 day: {
@@ -44,6 +50,7 @@ export const CalendarProvider = ({ children }) => {
         day: {
             date: today,
             secondsWorked: 0,
+            workTimerStart: null, 
             dailyWellness: {
                 meditate: false,
                 move: false,

@@ -2,12 +2,12 @@ import { useContext, useEffect } from "react";
 import { TimeContext } from '../../context/TimeContext';
 
 const GetTime = () => {
-
     // clock (date and time) context:
     const { setTime } = useContext(TimeContext);
 
     useEffect(() => {
-        const interval = setInterval(getDate, 1000);
+        //update clock every 30 seconds
+        const interval = setInterval(getDate, 30000);
         return () => {
             clearInterval(interval);
         };
@@ -17,6 +17,18 @@ const GetTime = () => {
         const date = new Date()
         setTime(date);
 
+    }
+
+    return (
+        <div style={{ display: "none" }}>invisible</div>
+    )
+}
+
+export default GetTime;
+
+
+
+        
         // if (props.isOn && date.toLocaleTimeString("en-GB") === "23:59:55") {
         //     // send seconds worked to db - set in db CONTINUE TIMER TRUE
         //     const beforeReset = async () => {
@@ -55,13 +67,3 @@ const GetTime = () => {
         //     }
         //     afterReset();
         // }
-
-
-    }
-
-    return (
-        <div style={{ display: "none" }}>invisible</div>
-    )
-}
-
-export default GetTime;

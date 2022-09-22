@@ -8,6 +8,7 @@ const Schema = mongoose.Schema;
     },
     completedTasks: [String], 
     secondsWorked: Number, 
+    workTimerStart: Date, 
     dailyWellness: {
         meditate: Boolean, 
         move: Boolean, 
@@ -20,7 +21,6 @@ const Schema = mongoose.Schema;
         item3: String
     }, 
     breakExercises: [String], 
-    continueTimer: Boolean
     },{retainKeyOrder: true, timestamps: true });
 
     module.exports= mongoose.model('CalendarDay', calendarSchema);

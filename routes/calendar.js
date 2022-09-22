@@ -22,6 +22,6 @@ router.post('/', createItem);
 router.delete('/:id', deleteItem);
 
 //UPDATE a document
-router.patch('/:id', updateItem);
+router.patch('/:date', updateItem);
 
 module.exports = router

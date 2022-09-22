@@ -4,7 +4,7 @@ import { TimeContext } from '../../context/TimeContext';
 import { getMessage, getExercises, getImage } from './getExercises';
 import formatSeconds from '../../modules/formatSeconds';
 import today from '../../modules/today';
-import GetTime from './GetTime';
+import GetTime from '../nav/GetTime';
 
 
 const Timer = () => {
@@ -13,7 +13,7 @@ const Timer = () => {
     const { time } = useContext(TimeContext);
 
     // work timer states
-    const [workTimerStart, setWorkTimerStart] = useState(null);
+    // const [workTimerStart, setWorkTimerStart] = useState(null);
     const [workDisplay, setWorkDisplay] = useState(0);
 
     // break timer states
@@ -22,34 +22,41 @@ const Timer = () => {
     const [breakInfo, setBreakInfo] = useState({ count: 0 });
 
     // work timer Effect --> runs when worktimer start isnt null. effect is triggered by seconds in the time context.
+
+    const myWorkTimer = () => {
+        setWorkDisplay(workDisplay + 1);
+    }
+
     useEffect(() => {
-        if (workTimerStart !== null) {
-            const thisInterval = (time - workTimerStart) / 1000;
-            setWorkDisplay(day.secondsWorked + thisInterval);
-        } else if (workTimerStart === null) {
+        // if work timer has started (value from calendar context or db if refresh)
+        if (workDisplay === 0 && day.secondsWorked > 0) {
+            const s = (new Date() - new Date(day.workTimerStart)) / 1000
+            const afterReset = day.secondsWorked + s;
+            setWorkDisplay(afterReset)
+        }
+        if (day.workTimerStart !== null) {
+            const thisInterval = setInterval(myWorkTimer, 1000);
+            return () => {
+                clearInterval(thisInterval);
+            }
+        } else if (day.workTimerStart === null) {
             setWorkDisplay(day.secondsWorked);
         }
-    })
+    });
+
+
 
     // work button
     const clickWork = () => {
-        if (workTimerStart !== null) {
+        if (day.workTimerStart !== null) {
             stopWorkTimer();
-        } else if (workTimerStart === null) { //start work timer by setting start time. 
-            setWorkTimerStart(time);
-        }
-    }
+        } else if (day.workTimerStart === null) { //start work timer by setting start time. 
+            dispatch({ type: 'SET_WORK_START_TIME', payload: new Date() });
 
-    //function to stop work timer
-    const stopWorkTimer = () => {
-        if (workTimerStart) {
-            // calculate seconds worked in this bout, dispatch secondsWorked to Calendar Context, send secondsWorked to DB, set "WorkTimerStart" to null. 
-            const secsWorked = (time - workTimerStart) / 1000;
-            dispatch({ type: 'SET_WORK_TIMER', payload: day.secondsWorked + secsWorked });
             const updateDb = async () => {
                 const response = await fetch('api/calendar/' + today(), {
                     method: "PATCH",
-                    body: JSON.stringify({ secondsWorked: day.secondsWorked + secsWorked }),
+                    body: JSON.stringify({ workTimerStart: new Date() }),
                     headers: { "Content-Type": 'application/json' }
                 })
                 const json = await response.json();
@@ -58,16 +65,46 @@ const Timer = () => {
                 }
             }
             updateDb();
-            setWorkTimerStart(null);
+        }
+    }
+
+    //function to stop work timer
+    const stopWorkTimer = () => {
+        if (day.workTimerStart) {
+            // calculate seconds worked in this bout, dispatch secondsWorked to Calendar Context, send secondsWorked to DB, set "WorkTimerStart" to null. 
+            const secsWorked = (new Date() - new Date(day.workTimerStart)) / 1000;
+            const totalSecondsWorked = day.secondsWorked + secsWorked
+            console.log(secsWorked)
+            dispatch({ type: 'SET_WORK_TIMER', payload: totalSecondsWorked });
+            dispatch({ type: 'SET_WORK_START_TIME', payload: null });
+            const updateDb = async () => {
+                const response = await fetch('api/calendar/' + today(), {
+                    method: "PATCH",
+                    body: JSON.stringify({ secondsWorked: totalSecondsWorked, workTimerStart: null }),
+                    headers: { "Content-Type": 'application/json' }
+                })
+                const json = await response.json();
+                if (response.ok) {
+                    console.log(json);
+                }
+            }
+            updateDb();
+
         }
 
     }
 
     // Break Timer Effect --> 
+    const myBreakTimer = () => {
+        setBreakDisplay(breakDisplay + 1);
+    }
+
     useEffect(() => {
         if (breakTimerStart !== null) {
-            const breakInterval = (time - breakTimerStart) / 1000;
-            setBreakDisplay(breakInterval);
+            const breakInterval = setInterval(myBreakTimer, 1000)
+            return () => {
+                clearInterval(breakInterval);
+            }
         }
     })
 
@@ -133,7 +170,7 @@ const Timer = () => {
                 <p>{breakInfo.exercise && breakInfo.exercise.activity + " & " + breakInfo.exercise.stretch}</p>
                 <p className={breakInfo.breakEnd && "pink"}>{breakInfo.breakEnd && "Your last break ended at " + breakInfo.breakEnd.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</p>
             </div>
-             <GetTime />
+            <GetTime />
         </div>
     )
 }
