@@ -6,7 +6,6 @@ Wellness Homepage helps you work in a more healthy and mindful way.
 - Calendar page allows you to view data from past days
 
 Future features:
-- Improve work timer (allow for when heroku app goes to sleep and for over night)
-- Authentification
-- Page greeting customised to user 
-- User data stored in DB and displayed on their calendar page 
+- Authentication ->
+    - Page greeting customised to user 
+    - User data stored in DB and displayed on their calendar page 
