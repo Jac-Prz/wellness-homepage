@@ -12,13 +12,13 @@ const TimeDate = () => {
             const currentTime = time.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
             const hour = parseInt(currentTime.slice(0, 2));
             if (hour < 6) {
-                greeting = "Time for bed";
+                greeting = "Go to bed!";
             } else if (hour < 12) {
-                greeting = "Good Morning";
+                greeting = "Good Morning, Jac";
             } else if (hour < 17) {
-                greeting = "Good Afternoon";
+                greeting = "Good Afternoon, Jac";
             } else if (hour > 16) {
-                greeting = "Good Evening";
+                greeting = "Good Evening, Jac";
             }
             return greeting;
         } else {

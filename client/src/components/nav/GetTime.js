@@ -6,6 +6,7 @@ const GetTime = () => {
     const { setTime } = useContext(TimeContext);
 
     useEffect(() => {
+        getDate();
         //update clock every 30 seconds
         const interval = setInterval(getDate, 30000);
         return () => {
