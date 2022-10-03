@@ -9,14 +9,14 @@ const path = require("path");
 const app = express();
 
 // middleware
-app.use(express.json()); // it checks if incoming requests have body, if they do it parses it and attaches it to the request object so you can access it with req.body...
+app.use(express.json()); 
 
-app.use((req, res, next) => {  //simple middleware that will log the incoming requests - path and type
+app.use((req, res, next) => { 
     console.log(req.path, req.method)
-    next() // if you dont include the next function, it will never go onto the next piece of middleware (app.get('/))
+    next() 
 });
 
-//routes - the first arguement states the route, so you dont need to in the routing folder
+//routes 
 app.use('/api/todo', todoRoutes);
 app.use('/api/calendar', calendarRoutes);
 app.use(weather);
