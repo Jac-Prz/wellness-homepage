@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import WeekdayCell from "../components/calendar/WeekdayCell";
 import DateCell from "../components/calendar/DateCell";
 import PopupData from "../components/calendar/PopupData";
@@ -7,11 +7,16 @@ const CalendarPage = () => {
     const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+    //useStates
     const [calendarData, setCalendarData] = useState(null);
     const [month, setMonth] = useState(new Date().getMonth());
     const [year, setYear] = useState(new Date().getFullYear());
     const [cells, setCells] = useState(null);
     const [showingData, setShowingData] = useState(null);
+
+    // useRef
+    const calendarDataRef = useRef(null)
+
 
     // use effect to get calendar data from db
     useEffect(() => {
@@ -74,50 +79,58 @@ const CalendarPage = () => {
         }
     }
 
-
-    const showData = (dataForThisDate) => {
+    const showData = async (dataForThisDate) => {
         if (dataForThisDate) {
             setShowingData(dataForThisDate);
-        } else if(!dataForThisDate){
+            setTimeout(() => {
+                calendarDataRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                })}, 200);
+
+            
+        } else if (!dataForThisDate) {
             setShowingData(null)
         }
     };
 
     return (
-    <div>
-        <div className="calendar-container">
-            <div className="calendar">
-                <div className="calendar-header">
-                <div>
-                    <div className="arrow">
-                        <button onClick={backwardMonth}>&lt;</button>
+        <div>
+            <div className="calendar-container">
+                <div className="calendar">
+                    <div className="calendar-header">
+                        <div>
+                            <div className="arrow">
+                                <button onClick={backwardMonth}>&lt;</button>
+                            </div>
+                        </div>
+                        <div className="header">
+                            <h3>{months[month]}</h3>
+                        </div>
+                        <div className="arrow">
+                            <button onClick={forwardMonth}>&gt;</button>
+                        </div>
                     </div>
+                    <div className="calendar-body">
+                        <div className="weekdays">
+                            {weekdays.map((day, index) => <WeekdayCell key={index} day={day} />)}
+                        </div>
+                        <div className="calendar-cells">
+                            {calendarData && cells.map((cell, index) => <DateCell key={index} date={cell} data={calendarData} showData={showData} thisMonth={month} />)}
+                        </div>
                     </div>
-                    <div className="header">
-                        <h3>{months[month]}</h3>
+                    <div className="calendar-footer">
+                        <p>Click the date to view calendar data for that day</p>
                     </div>
-                    <div className="arrow">
-                        <button onClick={forwardMonth}>&gt;</button>
-                    </div>
-                </div>
-                <div className="calendar-body">
-                    <div className="weekdays">
-                        {weekdays.map((day, index) => <WeekdayCell key={index} day={day} />)}
-                    </div>
-                    <div className="calendar-cells">
-                        {calendarData && cells.map((cell, index) => <DateCell key={index} date={cell} data={calendarData} showData={showData} thisMonth={month} />)}
-                    </div>
-                </div>
-                <div className="calendar-footer">
-                    <p>Click the date to view calendar data for that day</p>
                 </div>
             </div>
+            <div ref={calendarDataRef}>
+                <PopupData showingData={showingData} />
+                </div>
         </div>
-        
-<PopupData showingData={showingData}/>
-    </div>
     )
 }
 
 export default CalendarPage;
 
+//to fix: if refresh in calendar page, you lose time & date.

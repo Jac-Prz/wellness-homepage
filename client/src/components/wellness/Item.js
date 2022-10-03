@@ -39,6 +39,7 @@ const Item = (props) => {
 
     return (
         <li
+            className="wellness-checklist"
             onClick={completeItem}
             style={isComplete ? { textDecoration: "line-through" } : { textDecoration: "none" }}>
             {props.text}

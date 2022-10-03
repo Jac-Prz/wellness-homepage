@@ -215,6 +215,11 @@ h2 {
   cursor: pointer;
 }
 
+.time-display:hover{
+font-weight: 900;
+border: 2px solid #E8E9ED;;
+}
+
 .exercise-div {
   padding-top: 5%;
 }
@@ -276,6 +281,10 @@ h2 {
   padding: 5px;
   margin: 0;
 }
+
+.wellness-checklist:hover{
+  font-weight: 900;
+  }
 
 /* TODO */
 #todo-list-section {
@@ -467,6 +476,10 @@ h2 {
   box-shadow: var(--drk-box-shadow);
 }
 
+.calendar-header button:hover{
+  background-color: #ff9ab5;
+}
+
 /* calendar-body */
 .weekdays,
 .calendar-cells {
@@ -501,6 +514,12 @@ h2 {
 
 .highlight {
   background-color: var(--pink);
+  cursor: pointer;
+}
+
+.highlight:hover{
+font-weight: 900;
+background-color: #FF7B9CCC;
 }
 
 .opaque {
