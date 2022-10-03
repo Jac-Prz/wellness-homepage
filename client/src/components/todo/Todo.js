@@ -3,8 +3,8 @@ import { useTodoContext } from "../../hooks/useTodoContext";
 import ListItem from "./ListItem";
 import TodoForm from './TodoForm';
 
-
 const Todo = (props) => {
+
     const { items, dispatch } = useTodoContext();
 
     useEffect(() => {
@@ -16,7 +16,6 @@ const Todo = (props) => {
                 dispatch({ type: 'SET_ITEMS', payload: json })
             }
         }
-
         fetchItems();
     }, [])
 

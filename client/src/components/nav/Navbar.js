@@ -1,10 +1,8 @@
 import TimeDate from './TimeDate';
 import NavLinks from './NavLinks';
 
-
 const Navbar = () => {
-    
-    return (
+        return (
         <header className="invert-color">
             <div className="nav-container">
                 <TimeDate /> 

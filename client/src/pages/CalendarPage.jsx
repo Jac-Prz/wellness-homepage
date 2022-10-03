@@ -52,7 +52,6 @@ const CalendarPage = () => {
                 daysInMonth.push(new Date(year, month + 1, i + 1));
             }
         }
-
         setCells(daysInMonth);
         // if month or year changes, this will refresh
     }, [month, year])

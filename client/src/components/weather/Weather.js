@@ -8,15 +8,13 @@ const Weather = () => {
         const fetchWeather = async () => {
             const response = await fetch('/api/weather');
             const json = await response.json();
-
             if (response.ok) {
                 setWeatherData(json)
             }
         }
-
         fetchWeather();
-
     }, [])
+
     return (
         <div id="weather-section" className="section">
             <div className="current-weather flex-row-strd">
@@ -26,8 +24,8 @@ const Weather = () => {
                     <h3 className="no-margin">{weatherData && weatherData.current.weather[0].description}</h3>
                 </div>
             </div>
-            {weatherData && weatherData.daily.slice(0,3).map((day, index) => {
-                return <WeatherForecast temp={day.temp.max} desc={day.weather[0].description} icon={day.weather[0].icon} key={index}/>
+            {weatherData && weatherData.daily.slice(0, 3).map((day, index) => {
+                return <WeatherForecast temp={day.temp.max} desc={day.weather[0].description} icon={day.weather[0].icon} key={index} />
             })}
         </div>
     )

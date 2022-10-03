@@ -29,7 +29,7 @@ const TimeDate = () => {
     return (
         <div className="time-date">
             <div className="nav-left">
-                <h2>{time && time.toLocaleTimeString("en-GB", { hour: '2-digit', minute: '2-digit' })}</h2> 
+                <h2>{time && time.toLocaleTimeString("en-GB", { hour: '2-digit', minute: '2-digit' })}</h2>
                 <p>{time ? time.toLocaleDateString('en-GB', { weekday: 'long', month: 'long', day: 'numeric' }) : ""}</p>
             </div>
             <div className="greeting"><h1>{getGreeting()}</h1></div>

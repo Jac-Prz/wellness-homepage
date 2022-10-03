@@ -12,12 +12,12 @@ export const todoReducer = (state, action) => {
             return {
                 items: [action.payload, ...state.items]
             }
-            case 'DELETE_ITEM':
-                return {
-                    items: state.items.filter((i) => i._id !== action.payload._id)
-                }
-            default:
-                return state
+        case 'DELETE_ITEM':
+            return {
+                items: state.items.filter((i) => i._id !== action.payload._id)
+            }
+        default:
+            return state
     }
 }
 
@@ -27,7 +27,7 @@ export const TodoContextProvider = ({ children }) => {
     })
 
     return (
-        <TodoContext.Provider value={{...state, dispatch}}>
+        <TodoContext.Provider value={{ ...state, dispatch }}>
             {children}
         </TodoContext.Provider>
     )

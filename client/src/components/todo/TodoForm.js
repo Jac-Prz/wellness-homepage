@@ -1,32 +1,30 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useTodoContext } from "../../hooks/useTodoContext";
 
 const TodoForm = (props) => {
-    const {dispatch} = useTodoContext()
+    const { dispatch } = useTodoContext()
     const [newItem, setNewItem] = useState("");
     const [error, setError] = useState(null);
 
     const submitItem = async (e) => {
         e.preventDefault();
-
         const response = await fetch('/api/todo', {
             method: 'POST',
-            body: JSON.stringify({item: newItem, list: props.type}),
+            body: JSON.stringify({ item: newItem, list: props.type }),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
         const json = await response.json();
-         if(!response.ok){
+        if (!response.ok) {
             setError(json.error)
-         }
-         if(response.ok){
+        }
+        if (response.ok) {
             setError(null);
             console.log("new item added ", json)
             setNewItem("");
-            dispatch({type: 'CREATE_ITEM', payload: json})
-         }
-        
+            dispatch({ type: 'CREATE_ITEM', payload: json })
+        }
     }
 
     return (
@@ -37,4 +35,5 @@ const TodoForm = (props) => {
         </form>
     )
 }
+
 export default TodoForm;

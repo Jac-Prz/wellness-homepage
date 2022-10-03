@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useCalendarContext } from "../../hooks/useCalendarContext";
 import today from "../../modules/today";
+
 const GratitudeList = () => {
+
     const characters = ["cactus", "coffee-cup", "crab", "dinosaur", "french-fries", "octopus", "penguin", "pineapple", "rainbow"]
     const { day } = useCalendarContext();
 
@@ -10,9 +12,9 @@ const GratitudeList = () => {
     const [submitted, setSubmitted] = useState(false);
     const [character, setCharacter] = useState(characters[0]);
 
-    useEffect(()=>{
-        if (day){
-             if (day.gratitude.item1.length !== 0 && day.gratitude.item2.length !== 0 && day.gratitude.item3.length !== 0) {
+    useEffect(() => {
+        if (day) {
+            if (day.gratitude.item1.length !== 0 && day.gratitude.item2.length !== 0 && day.gratitude.item3.length !== 0) {
                 setSubmitted(true);
             }
         }
@@ -20,7 +22,6 @@ const GratitudeList = () => {
 
     const inputItems = (e) => {
         const { name, value } = e.target
-
         setGratItems((prevValue) => {
             if (name === "1") {
                 return {
@@ -45,12 +46,9 @@ const GratitudeList = () => {
     }
 
     const submitList = () => {
-
         if (gratItems.item1.length !== 0 && gratItems.item2.length !== 0 && gratItems.item3.length !== 0) {
             // submit list to DB
-
             const submitGratitude = async () => {
-
                 const response = await fetch('/api/calendar/' + today(), {
                     method: "PATCH",
                     body: JSON.stringify({ gratitude: gratItems }),
@@ -59,8 +57,7 @@ const GratitudeList = () => {
                     }
                 })
                 const json = await response.json()
-
-                if(response.ok){
+                if (response.ok) {
                     console.log(json)
                 }
             }
@@ -84,7 +81,6 @@ const GratitudeList = () => {
             <div className="flex-col-strd" style={!submitted ? { display: "none" } : { display: "flex" }}>
                 <img className="gratitude-image" src={"/images/icons/" + character + ".png"} alt="kawaii" />
             </div>
-
         </div>
     )
 };

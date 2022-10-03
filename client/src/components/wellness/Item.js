@@ -3,12 +3,11 @@ import { useCalendarContext } from "../../hooks/useCalendarContext";
 import today from "../../modules/today";
 
 const Item = (props) => {
+   
     const { day, dispatch } = useCalendarContext()
-    
     const [isComplete, setComplete] = useState(false);
 
     useEffect(() => {
-        
         if (day) {
             if (day.dailyWellness[props.name]) {
                 setComplete(true)
@@ -17,28 +16,23 @@ const Item = (props) => {
     }, [day, props.name])
 
     const completeItem = () => {
+        const updateItem = async () => {
 
-         const updateItem = async () => {
-            
-           const update = {dailyWellness: {...day.dailyWellness, [props.name]: true}}
-           dispatch({type:'SET_WELLNESS', payload: update})
-            
-           const response = await fetch('/api/calendar/' + today(), {
-                method: 'PATCH', 
-                body: JSON.stringify(update), 
+            const update = { dailyWellness: { ...day.dailyWellness, [props.name]: true } }
+            dispatch({ type: 'SET_WELLNESS', payload: update })
+
+            const response = await fetch('/api/calendar/' + today(), {
+                method: 'PATCH',
+                body: JSON.stringify(update),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-
             const json = await response.json()
-
-            if (response.ok){
+            if (response.ok) {
                 console.log(json);
-                
             }
         }
-
         updateItem()
         setComplete(true)
     }

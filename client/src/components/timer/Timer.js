@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useCalendarContext } from '../../hooks/useCalendarContext';
 import { TimeContext } from '../../context/TimeContext';
-import { getMessage, getExercises, getImage } from './getExercises';
+import { getMessage, getExercises, getImage } from '../../modules/getExercises';
 import formatSeconds from '../../modules/formatSeconds';
 import today from '../../modules/today';
 import GetTime from '../nav/GetTime';
@@ -44,15 +44,12 @@ const Timer = () => {
         }
     });
 
-
-
     // work button
     const clickWork = () => {
         if (day.workTimerStart !== null) {
             stopWorkTimer();
         } else if (day.workTimerStart === null) { //start work timer by setting start time. 
             dispatch({ type: 'SET_WORK_START_TIME', payload: new Date() });
-
             const updateDb = async () => {
                 const response = await fetch('api/calendar/' + today(), {
                     method: "PATCH",
@@ -89,9 +86,7 @@ const Timer = () => {
                 }
             }
             updateDb();
-
         }
-
     }
 
     // Break Timer Effect --> 
@@ -150,8 +145,6 @@ const Timer = () => {
         }
     }
 
-
-
     return (
         <div id="timer-section" className="upper-section section">
             <div className="timer split-box">
@@ -174,5 +167,6 @@ const Timer = () => {
         </div>
     )
 }
+
 export default Timer;
 
