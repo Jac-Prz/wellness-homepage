@@ -11,7 +11,11 @@ A MERN stack application to help you work in a more healthy and mindful way! <br
 </ul><br>
 
 <h3> Future features </h3>
-- Authentication and user accounts->
-    - Page greeting customised to user 
-    - User data stored in DB and displayed on their calendar page 
-- Improve work timer
+<ul>
+<li>Authentication and user accounts:
+<ul> 
+    <li> Page greeting customised to user 
+    <li> User data stored in DB and displayed on their calendar page 
+    </ul>
+<li>Improve work timer
+</ul>
